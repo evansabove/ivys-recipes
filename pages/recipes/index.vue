@@ -42,11 +42,11 @@ function toggleCuisine(cuisine: string) {
 
 useHead({
   title: 'Recipes',
-  titleTemplate: (t) => t ? `${t} | food.andyevans.dev` : 'food.andyevans.dev',
+  titleTemplate: (t) => t ? `${t} | ivys-recipes.andyevans.dev` : 'ivys-recipes.andyevans.dev',
 })
 
 useSeoMeta({
-  ogTitle: 'Recipes | food.andyevans.dev',
+  ogTitle: 'Recipes | ivys-recipes.andyevans.dev',
   description: runtimeConfig.public.appDescription,
   ogDescription: runtimeConfig.public.appDescription,
   ogLocale: 'en_GB',
