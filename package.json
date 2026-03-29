@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@nuxt/content": "^3.4.0",
-    "@nuxt/fonts": "^0.14.0",
+    "@nuxt/fonts": "^0.10.3",
     "@nuxt/icon": "^1.10.3",
     "@nuxtjs/sitemap": "^7.2.4",
     "@nuxtjs/tailwindcss": "^6.13.1",
