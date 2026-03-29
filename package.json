@@ -1,5 +1,5 @@
 {
-  "name": "food-site",
+  "name": "ivys-recipes",
   "private": true,
   "type": "module",
   "scripts": {
@@ -23,6 +23,7 @@
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@iconify-json/fa6-brands": "^1.2.5"
+    "@iconify-json/fa6-brands": "^1.2.5",
+    "sharp": "^0.34.5"
   }
 }
