@@ -20,7 +20,7 @@ ingredients:
       - "2 cloves garlic"
       - "1 handful parsley"
       - "1 tbsp plain flour"
-      - "Chicken stock"
+      - "500ml chicken stock"
       - "3 tbsp creme fraiche"
   - group: "To serve"
     items:
