@@ -2,7 +2,7 @@
 title: "Apple Crumble"
 description: "A family classic - I used some frozen berries in this version - use your imagination to make this even more excellent!"
 date: 2026-03-30
-cuisine: British
+category: Pudding
 prepTime: "15 mins"
 cookTime: "40 mins"
 servings: 4

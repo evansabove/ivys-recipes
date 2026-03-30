@@ -47,7 +47,7 @@ useHead({
       image: recipe.value?.image,
       datePublished: recipe.value?.date,
       author: [{ '@type': 'Person', name: 'Andy Evans', url: runtimeConfig.public.appUrl }],
-      recipeCategory: recipe.value?.cuisine,
+      recipeCategory: recipe.value?.category,
       prepTime: recipe.value?.prepTime,
       cookTime: recipe.value?.cookTime,
       recipeYield: recipe.value?.servings ? `${recipe.value.servings} servings` : undefined,
@@ -80,7 +80,7 @@ useHead({
       />
 
       <RecipeMeta
-        :cuisine="recipe.cuisine"
+        :category="recipe.category"
         :prepTime="recipe.prepTime"
         :cookTime="recipe.cookTime"
         :servings="recipe.servings"

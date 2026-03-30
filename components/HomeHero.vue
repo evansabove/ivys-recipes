@@ -5,7 +5,7 @@
         <span class="hero-title-accent">Ivy's</span> Recipes
       </h1>
       <p class="hero-subtitle">
-        Simple, delicious recipes for every occasion — from weeknight dinners to weekend feasts.
+        Simple, delicious recipes for every occasion — from weeknight dinners to weekend feasts to yummy puddings....
       </p>
       <NuxtLink to="/recipes" class="hero-cta">
         Browse Recipes

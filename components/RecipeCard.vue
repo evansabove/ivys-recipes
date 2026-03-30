@@ -4,7 +4,7 @@ defineProps<{
     path: string
     title: string
     description: string
-    cuisine?: string
+    category?: string
     prepTime?: string
     cookTime?: string
     servings?: number
@@ -30,8 +30,8 @@ defineProps<{
     </div>
 
     <div class="recipe-card-body">
-      <div class="recipe-card-meta-row" v-if="recipe.cuisine">
-        <span class="recipe-card-cuisine">{{ recipe.cuisine }}</span>
+      <div class="recipe-card-meta-row" v-if="recipe.category">
+        <span class="recipe-card-category">{{ recipe.category }}</span>
       </div>
 
       <h3 class="recipe-card-title">{{ recipe.title }}</h3>
@@ -104,7 +104,7 @@ defineProps<{
   @apply flex items-center gap-2;
 }
 
-.recipe-card-cuisine {
+.recipe-card-category {
   @apply text-xs font-semibold uppercase tracking-wider;
   @apply text-emerald-700;
 }

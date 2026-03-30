@@ -10,7 +10,7 @@ export default defineContentConfig({
         description: z.string(),
         date: z.string(),
         tags: z.array(z.string()).optional(),
-        cuisine: z.string().optional(),
+        category: z.enum(['Breakfast', 'Lunch', 'Dinner', 'Pudding']).optional(),
         prepTime: z.string().optional(),
         cookTime: z.string().optional(),
         servings: z.number().optional(),

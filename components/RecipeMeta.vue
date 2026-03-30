@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  cuisine?: string
+  category?: string
   prepTime?: string
   cookTime?: string
   servings?: number
@@ -10,10 +10,10 @@ defineProps<{
 
 <template>
   <div class="recipe-meta">
-    <div v-if="cuisine" class="recipe-meta-item">
-      <Icon name="fa6-solid:earth-europe" class="recipe-meta-icon" />
-      <span class="recipe-meta-label">Cuisine</span>
-      <span class="recipe-meta-value">{{ cuisine }}</span>
+    <div v-if="category" class="recipe-meta-item">
+      <Icon name="fa6-solid:tag" class="recipe-meta-icon" />
+      <span class="recipe-meta-label">Category</span>
+      <span class="recipe-meta-value">{{ category }}</span>
     </div>
     <div v-if="prepTime" class="recipe-meta-item">
       <Icon name="fa6-regular:clock" class="recipe-meta-icon" />

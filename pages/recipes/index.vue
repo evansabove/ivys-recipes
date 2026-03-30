@@ -8,27 +8,27 @@ const { data: allRecipes } = await useAsyncData('all-recipes', () =>
     .all()
 )
 
-// Collect all unique tags and cuisines for filtering
+// Collect all unique tags and categories for filtering
 const allTags = computed(() => {
   const tags = new Set<string>()
   allRecipes.value?.forEach(r => r.tags?.forEach(t => tags.add(t)))
   return Array.from(tags).sort()
 })
 
-const allCuisines = computed(() => {
-  const cuisines = new Set<string>()
-  allRecipes.value?.forEach(r => { if (r.cuisine) cuisines.add(r.cuisine) })
-  return Array.from(cuisines).sort()
+const allCategories = computed(() => {
+  const categories = new Set<string>()
+  allRecipes.value?.forEach(r => { if (r.category) categories.add(r.category) })
+  return Array.from(categories).sort()
 })
 
 const selectedTag = ref<string | null>(null)
-const selectedCuisine = ref<string | null>(null)
+const selectedCategory = ref<string | null>(null)
 
 const filteredRecipes = computed(() => {
   return (allRecipes.value ?? []).filter(r => {
     const tagMatch = !selectedTag.value || r.tags?.includes(selectedTag.value)
-    const cuisineMatch = !selectedCuisine.value || r.cuisine === selectedCuisine.value
-    return tagMatch && cuisineMatch
+    const categoryMatch = !selectedCategory.value || r.category === selectedCategory.value
+    return tagMatch && categoryMatch
   })
 })
 
@@ -36,8 +36,8 @@ function toggleTag(tag: string) {
   selectedTag.value = selectedTag.value === tag ? null : tag
 }
 
-function toggleCuisine(cuisine: string) {
-  selectedCuisine.value = selectedCuisine.value === cuisine ? null : cuisine
+function toggleCategory(category: string) {
+  selectedCategory.value = selectedCategory.value === category ? null : category
 }
 
 useHead({
@@ -62,17 +62,17 @@ useSeoMeta({
       <h1 class="recipes-heading">All Recipes</h1>
 
       <!-- Filters -->
-      <div class="filters" v-if="allCuisines.length || allTags.length">
-        <div v-if="allCuisines.length" class="filter-group">
-          <span class="filter-label">Cuisine</span>
+      <div class="filters" v-if="allCategories.length || allTags.length">
+        <div v-if="allCategories.length" class="filter-group">
+          <span class="filter-label">Category</span>
           <button
-            v-for="cuisine in allCuisines"
-            :key="cuisine"
+            v-for="category in allCategories"
+            :key="category"
             class="filter-chip"
-            :class="{ 'filter-chip--active': selectedCuisine === cuisine }"
-            @click="toggleCuisine(cuisine)"
+            :class="{ 'filter-chip--active': selectedCategory === category }"
+            @click="toggleCategory(category)"
           >
-            {{ cuisine }}
+            {{ category }}
           </button>
         </div>
         <div v-if="allTags.length" class="filter-group">
