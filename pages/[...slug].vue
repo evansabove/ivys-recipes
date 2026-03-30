@@ -32,6 +32,10 @@ useSeoMeta({
   twitterImage: computed(() => recipe.value?.image ?? runtimeConfig.public.appImage),
 })
 
+const allIngredients = computed(() =>
+  recipe.value?.ingredients?.flatMap(g => g.items) ?? []
+)
+
 useHead({
   script: [{
     type: 'application/ld+json',
@@ -47,6 +51,7 @@ useHead({
       prepTime: recipe.value?.prepTime,
       cookTime: recipe.value?.cookTime,
       recipeYield: recipe.value?.servings ? `${recipe.value.servings} servings` : undefined,
+      recipeIngredient: allIngredients.value.length ? allIngredients.value : undefined,
     }))
   }]
 })
@@ -73,7 +78,7 @@ useHead({
         :alt="recipe.imageAlt ?? recipe.title"
         class="recipe-hero-image"
       />
-      
+
       <RecipeMeta
         :cuisine="recipe.cuisine"
         :prepTime="recipe.prepTime"
@@ -81,7 +86,47 @@ useHead({
         :servings="recipe.servings"
       />
 
-      <div class="recipe-body">
+      <!-- Intro paragraph -->
+      <p v-if="recipe.intro" class="recipe-intro">{{ recipe.intro }}</p>
+
+      <!-- Ingredients -->
+      <section v-if="recipe.ingredients?.length" class="recipe-ingredients">
+        <h2 class="recipe-section-heading">Ingredients</h2>
+        <div
+          v-for="group in recipe.ingredients"
+          :key="group.group ?? 'default'"
+          class="recipe-ingredients-group"
+        >
+          <h3 v-if="group.group" class="recipe-ingredients-group-name">{{ group.group }}</h3>
+          <ul class="recipe-ingredients-list">
+            <li v-for="item in group.items" :key="item" class="recipe-ingredients-item">
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Method steps with quantity highlighting -->
+      <RecipeMethod v-if="recipe.steps?.length" :steps="recipe.steps" />
+
+      <!-- Serve -->
+      <section v-if="recipe.serve" class="recipe-serve">
+        <h2 class="recipe-section-heading">Serve</h2>
+        <p class="recipe-serve-text">{{ recipe.serve }}</p>
+      </section>
+
+      <!-- Tips -->
+      <section v-if="recipe.tips?.length" class="recipe-tips">
+        <h2 class="recipe-section-heading">Tips</h2>
+        <ul class="recipe-tips-list">
+          <li v-for="tip in recipe.tips" :key="tip" class="recipe-tips-item">
+            {{ tip }}
+          </li>
+        </ul>
+      </section>
+
+      <!-- Fallback: remaining markdown body content -->
+      <div v-if="(recipe.body as any)?.children?.length" class="recipe-body">
         <ContentRenderer :value="recipe" />
       </div>
     </article>
@@ -91,6 +136,10 @@ useHead({
 <style scoped>
 .recipe-detail {
   @apply max-w-3xl mx-auto;
+}
+
+.recipe-intro {
+  @apply text-base text-stone-600 leading-relaxed mb-8 italic;
 }
 
 .recipe-detail-header {
@@ -118,14 +167,68 @@ useHead({
 
 .recipe-hero-image {
   @apply w-full rounded-2xl shadow-md mb-8;
-  @apply my-0;
+  @apply mt-0;
   max-height: 400px;
   object-fit: cover;
+}
+
+.recipe-section-heading {
+  @apply text-xl font-bold text-emerald-900 mb-4 mt-0;
+}
+
+.recipe-ingredients {
+  @apply mb-6;
+}
+
+.recipe-ingredients-group {
+  @apply mb-4 last:mb-0;
+}
+
+.recipe-ingredients-group-name {
+  @apply text-sm font-semibold uppercase tracking-wide text-emerald-600 mb-2 mt-0;
+}
+
+.recipe-ingredients-list {
+  @apply list-none p-0 m-0 space-y-1;
+}
+
+.recipe-ingredients-item {
+  @apply text-stone-700 flex items-start gap-2;
+
+  &::before {
+    content: '–';
+    @apply text-emerald-400 flex-shrink-0;
+  }
+}
+
+.recipe-serve {
+  @apply mb-6;
+}
+
+.recipe-serve-text {
+  @apply text-stone-700 leading-relaxed;
+}
+
+.recipe-tips {
+  @apply mb-6;
+}
+
+.recipe-tips-list {
+  @apply list-none p-0 m-0 space-y-2;
+}
+
+.recipe-tips-item {
+  @apply text-stone-700 flex items-start gap-2;
+
+  &::before {
+    content: '💡';
+    font-size: 1.5rem;
+    line-height: 1;
+    @apply flex-shrink-0;
+  }
 }
 
 .recipe-body {
   /* Markdown content — base styles from main.css */
 }
-
-
 </style>
