@@ -106,6 +106,9 @@ useHead({
         </div>
       </section>
 
+      <!-- In-content ad between ingredients and method: replace slot with your AdSense ad unit slot ID -->
+      <AdUnit slot="REPLACE_WITH_YOUR_AD_SLOT_ID" format="auto" />
+
       <!-- Method steps with quantity highlighting -->
       <RecipeMethod v-if="recipe.steps?.length" :steps="recipe.steps" />
 
