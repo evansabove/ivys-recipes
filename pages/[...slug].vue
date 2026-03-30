@@ -13,6 +13,12 @@ if (!recipe.value) {
   throw createError({ statusCode: 404, statusMessage: 'Recipe not found' })
 }
 
+// Draft recipes are only visible in development.
+// In production, accessing a draft URL directly returns a 404.
+if (recipe.value.draft && !import.meta.dev) {
+  throw createError({ statusCode: 404, statusMessage: 'Recipe not found' })
+}
+
 useHead({
   title: computed(() => recipe.value?.title),
   titleTemplate: (t) => t ? `${t} | Ivy's Recipes` : "Ivy's Recipes",
@@ -60,6 +66,13 @@ useHead({
 <template>
   <AppTemplate>
     <article v-if="recipe" class="recipe-detail">
+
+      <!-- Draft banner — only visible in development -->
+      <div v-if="recipe.draft" class="recipe-draft-banner">
+        <Icon name="fa6-solid:pencil" />
+        <span>Draft — this recipe is not published yet</span>
+      </div>
+
       <header class="recipe-detail-header">
         <NuxtLink to="/recipes" class="recipe-back-link">
           <Icon name="fa6-solid:arrow-left" /> All Recipes
@@ -141,6 +154,12 @@ useHead({
   @apply max-w-3xl mx-auto;
 }
 
+.recipe-draft-banner {
+  @apply flex items-center gap-2 mb-6;
+  @apply bg-amber-50 border border-amber-300 text-amber-800;
+  @apply rounded-xl px-4 py-3 text-sm font-semibold;
+}
+
 .recipe-intro {
   @apply text-base text-stone-600 leading-relaxed mb-8 italic;
 }
@@ -197,6 +216,7 @@ useHead({
 
 .recipe-ingredients-item {
   @apply text-stone-700 flex items-start gap-2;
+  margin: 0;
 
   &::before {
     content: '–';
