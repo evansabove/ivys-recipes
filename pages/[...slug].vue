@@ -216,6 +216,7 @@ useHead({
 
 .recipe-ingredients-item {
   @apply text-stone-700 flex items-start gap-2;
+  margin: 0;
 
   &::before {
     content: '–';
