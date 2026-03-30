@@ -43,7 +43,7 @@ useHead({
 <template>
   <AppTemplate>
     <HomeHero />
-    <AdUnit slot="REPLACE_WITH_YOUR_AD_SLOT_ID" format="horizontal" />
+    <AdUnit slot="4820106706" format="horizontal" />
     <RecipeList
       :recipes="recentRecipes ?? []"
       heading="Recent Recipes"
