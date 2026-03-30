@@ -56,7 +56,7 @@ export default defineNuxtConfig({
   site: {
     url: 'https://ivys-recipes.andyevans.dev',
     name: appName,
-    trailingSlash: false
+    trailingSlash: true
   },
   experimental: {
     payloadExtraction: false
