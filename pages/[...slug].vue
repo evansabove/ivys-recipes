@@ -73,7 +73,7 @@ useHead({
         :alt="recipe.imageAlt ?? recipe.title"
         class="recipe-hero-image"
       />
-
+      
       <RecipeMeta
         :cuisine="recipe.cuisine"
         :prepTime="recipe.prepTime"
@@ -126,4 +126,6 @@ useHead({
 .recipe-body {
   /* Markdown content — base styles from main.css */
 }
+
+
 </style>

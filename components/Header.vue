@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <NuxtLink to="/" class="header-brand">
-      <Icon name="fa6-solid:leaf" class="header-brand-icon" />
+      <img src="/favicon.png" alt="Ivy leaf logo" class="header-brand-icon" />
       {{ config.public.appName }}
     </NuxtLink>
 
@@ -42,7 +42,7 @@ const open = ref(false)
 <style scoped>
 .header {
   @apply flex items-center justify-start;
-  background: linear-gradient(135deg, #14532d 0%, #166534 100%);
+  background: #0e4d2a;
   @apply text-white;
   @apply px-6 py-4 gap-8;
   @apply sticky top-0 z-50;
@@ -55,7 +55,9 @@ const open = ref(false)
 }
 
 .header-brand-icon {
-  @apply text-emerald-300;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
 .header-nav {
@@ -80,7 +82,7 @@ const open = ref(false)
 /* Slide-in mobile menu */
 .header-mobile-menu {
   @apply fixed top-0 right-0 h-full w-64 z-50;
-  background: #14532d;
+  background: #0e4d2a;
   @apply flex flex-col gap-6 p-6;
   @apply shadow-xl md:hidden;
 }
