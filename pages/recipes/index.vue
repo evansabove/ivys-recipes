@@ -2,11 +2,11 @@
 const runtimeConfig = useRuntimeConfig()
 const route = useRoute()
 
-const { data: allRecipes } = await useAsyncData('all-recipes', () =>
-  queryCollection('recipes')
-    .order('date', 'DESC')
-    .all()
-)
+const { data: allRecipes } = await useAsyncData('all-recipes', () => {
+  const query = queryCollection('recipes').order('date', 'DESC')
+  if (!import.meta.dev) query.where('draft', '<>', true)
+  return query.all()
+})
 
 // Collect all unique tags and categories for filtering
 const allTags = computed(() => {

@@ -4,7 +4,8 @@ defineProps<{
     path: string
     title: string
     description: string
-    cuisine?: string
+    category?: string
+    draft?: boolean
     prepTime?: string
     cookTime?: string
     servings?: number

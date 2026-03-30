@@ -5,6 +5,7 @@ defineProps<{
     title: string
     description: string
     category?: string
+    draft?: boolean
     prepTime?: string
     cookTime?: string
     servings?: number
@@ -30,8 +31,9 @@ defineProps<{
     </div>
 
     <div class="recipe-card-body">
-      <div class="recipe-card-meta-row" v-if="recipe.category">
-        <span class="recipe-card-category">{{ recipe.category }}</span>
+      <div class="recipe-card-meta-row" v-if="recipe.category || recipe.draft">
+        <span v-if="recipe.draft" class="recipe-card-draft-badge">Draft</span>
+        <span v-if="recipe.category" class="recipe-card-category">{{ recipe.category }}</span>
       </div>
 
       <h3 class="recipe-card-title">{{ recipe.title }}</h3>
@@ -102,6 +104,12 @@ defineProps<{
 
 .recipe-card-meta-row {
   @apply flex items-center gap-2;
+}
+
+.recipe-card-draft-badge {
+  @apply text-xs font-bold uppercase tracking-wider;
+  @apply bg-amber-100 text-amber-700 border border-amber-300;
+  @apply rounded px-1.5 py-0.5;
 }
 
 .recipe-card-category {
