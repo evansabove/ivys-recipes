@@ -38,7 +38,7 @@ onMounted(() => {
   <div class="ad-unit" :data-format="format">
     <ins
       class="adsbygoogle"
-      style="display:block"
+      style="display:block; width:100%"
       :data-ad-client="`ca-pub-${publisherId}`"
       :data-ad-slot="slot"
       :data-ad-format="format"
