@@ -16,6 +16,16 @@ export default defineContentConfig({
         servings: z.number().optional(),
         image: z.string().optional(),
         imageAlt: z.string().optional(),
+        intro: z.string().optional(),
+        steps: z.array(z.string()).optional(),
+        serve: z.string().optional(),
+        tips: z.array(z.string()).optional(),
+        ingredients: z.array(
+          z.object({
+            group: z.string().optional(),
+            items: z.array(z.string()),
+          })
+        ).optional(),
       })
     }),
     pages: defineCollection({
