@@ -13,9 +13,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       appName: appName,
-      appUrl: 'https://ivys-recipes.andyevans.dev',
+      appUrl: 'https://ivys-recipes.net',
       appDescription: "Ivy's Recipes — simple, delicious recipes for every occasion.",
-      appImage: 'https://ivys-recipes.andyevans.dev/og-image.png',
+      appImage: 'https://ivys-recipes.net/og-image.png',
       adsensePublisherId: adsensePublisherId,
     }
   },
@@ -54,7 +54,7 @@ export default defineNuxtConfig({
     }
   },
   site: {
-    url: 'https://ivys-recipes.andyevans.dev',
+    url: 'https://ivys-recipes.net',
     name: appName,
     trailingSlash: true
   },
