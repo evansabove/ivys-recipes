@@ -42,11 +42,11 @@ function toggleCategory(category: string) {
 
 useHead({
   title: 'Recipes',
-  titleTemplate: (t) => t ? `${t} | ivys-recipes.andyevans.dev` : 'ivys-recipes.andyevans.dev',
+  titleTemplate: (t) => t ? `${t} | ivys-recipes.net` : 'ivys-recipes.net',
 })
 
 useSeoMeta({
-  ogTitle: 'Recipes | ivys-recipes.andyevans.dev',
+  ogTitle: 'Recipes | ivys-recipes.net',
   description: runtimeConfig.public.appDescription,
   ogDescription: runtimeConfig.public.appDescription,
   ogLocale: 'en_GB',
