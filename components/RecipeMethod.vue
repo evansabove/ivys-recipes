@@ -60,12 +60,8 @@ function highlight(text: string): string {
 <!-- Global style for qty marks — scoped won't reach v-html content -->
 <style>
 .qty {
-  background: #dcfce7;      /* emerald-100 */
-  color: #14532d;           /* emerald-900 */
-  border-radius: 4px;
-  padding: 1px 5px;
-  font-weight: 600;
-  font-style: normal;
-  text-decoration: none;
+  background: none;
+  color: #14532d;
+  font-weight: bold;
 }
 </style>
