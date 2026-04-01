@@ -22,6 +22,7 @@ const props = withDefaults(defineProps<{
 
 const runtimeConfig = useRuntimeConfig()
 const publisherId = runtimeConfig.public.adsensePublisherId as string
+const adsEnabled = runtimeConfig.public.adsEnabled as boolean
 
 // Push the ad slot to the adsbygoogle queue once mounted (client-side only).
 onMounted(() => {
@@ -35,7 +36,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="ad-unit" :data-format="format">
+  <div v-if="adsEnabled" class="ad-unit" :data-format="format">
     <ins
       class="adsbygoogle"
       style="display:block; width:100%"
