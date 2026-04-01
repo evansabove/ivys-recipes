@@ -8,6 +8,8 @@ prepTime: "10 mins"
 cookTime: "25 mins"
 servings: 4
 tags: ["Chicken", "Comfort", "Creamy"]
+recipeCuisine: "Russian"
+keywords: ["chicken stroganoff", "mushroom stroganoff", "comfort food", "easy dinner", "creamy chicken"]
 intro: "This recipe is listed in my notes at home as 'almighty'. I hope you'll agree!"
 ingredients:
   - group: "For the stroganoff"

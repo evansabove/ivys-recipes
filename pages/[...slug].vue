@@ -42,6 +42,18 @@ const allIngredients = computed(() =>
   recipe.value?.ingredients?.flatMap(g => g.items) ?? []
 )
 
+// Convert human-readable durations like "15 mins", "1 hr 30 mins" to ISO 8601
+function toISO8601Duration(value: string | undefined): string | undefined {
+  if (!value) return undefined
+  const clean = value.toLowerCase().trim()
+  const hours = clean.match(/(\d+)\s*h(?:r|our)?s?/)
+  const mins = clean.match(/(\d+)\s*m(?:in)?s?/)
+  const h = hours ? parseInt(hours[1]) : 0
+  const m = mins ? parseInt(mins[1]) : 0
+  if (!h && !m) return undefined
+  return `PT${h ? `${h}H` : ''}${m ? `${m}M` : ''}`
+}
+
 useHead({
   script: [{
     type: 'application/ld+json',
@@ -54,10 +66,22 @@ useHead({
       datePublished: recipe.value?.date,
       author: [{ '@type': 'Person', name: 'Andy Evans', url: runtimeConfig.public.appUrl }],
       recipeCategory: recipe.value?.category,
-      prepTime: recipe.value?.prepTime,
-      cookTime: recipe.value?.cookTime,
+      recipeCuisine: recipe.value?.recipeCuisine,
+      keywords: recipe.value?.keywords?.join(', '),
+      prepTime: toISO8601Duration(recipe.value?.prepTime),
+      cookTime: toISO8601Duration(recipe.value?.cookTime),
       recipeYield: recipe.value?.servings ? `${recipe.value.servings} servings` : undefined,
       recipeIngredient: allIngredients.value.length ? allIngredients.value : undefined,
+      recipeInstructions: recipe.value?.steps?.length
+        ? recipe.value.steps.map((text, i) => ({
+            '@type': 'HowToStep',
+            position: i + 1,
+            text,
+          }))
+        : undefined,
+      nutrition: recipe.value?.nutrition
+        ? { '@type': 'NutritionInformation', ...recipe.value.nutrition }
+        : undefined,
     }))
   }]
 })
