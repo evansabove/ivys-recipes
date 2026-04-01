@@ -5,10 +5,7 @@ const adsensePublisherId = '6658400101081479'
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxt/content', '@nuxtjs/tailwindcss', '@nuxt/fonts', '@nuxtjs/sitemap', '@nuxt/icon', 'dayjs-nuxt', 'nuxt-seo-utils'],
-  fonts: {
-    families: [{ name: 'Nunito', provider: 'google', display: 'swap' }]
-  },
+  modules: ['@nuxt/content', '@nuxtjs/tailwindcss', '@nuxtjs/sitemap', '@nuxt/icon', 'dayjs-nuxt', 'nuxt-seo-utils'],
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
     public: {
