@@ -27,6 +27,17 @@ export default defineContentConfig({
             items: z.array(z.string()),
           })
         ).optional(),
+        recipeCuisine: z.string().optional(),
+        keywords: z.array(z.string()).optional(),
+        nutrition: z.object({
+          calories: z.string().optional(),
+          fatContent: z.string().optional(),
+          carbohydrateContent: z.string().optional(),
+          proteinContent: z.string().optional(),
+          fiberContent: z.string().optional(),
+          sugarContent: z.string().optional(),
+          sodiumContent: z.string().optional(),
+        }).optional(),
       })
     }),
     pages: defineCollection({

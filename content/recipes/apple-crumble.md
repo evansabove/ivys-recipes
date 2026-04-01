@@ -7,6 +7,8 @@ prepTime: "15 mins"
 cookTime: "40 mins"
 servings: 4
 tags: ["Pudding", "Comfort", "Classic"]
+recipeCuisine: "British"
+keywords: ["apple crumble", "pudding", "comfort food", "easy dessert", "family favourite"]
 image: /images/recipes/apple-crumble/finished.jpg
 imageAlt: "A delicious bowl of apple crumble"
 ingredients:
