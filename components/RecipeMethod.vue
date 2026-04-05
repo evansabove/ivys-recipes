@@ -20,7 +20,7 @@ function highlight(text: string): string {
         v-for="(step, i) in steps"
         :key="i"
         :id="'step-' + (i + 1)"
-        class="method-step"
+        class="method-step scroll-mt-24"
       >
         <span class="method-step-number">{{ i + 1 }}</span>
         <span class="method-step-text" v-html="highlight(step)" />
