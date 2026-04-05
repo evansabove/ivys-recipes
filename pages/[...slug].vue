@@ -76,7 +76,10 @@ useHead({
         ? recipe.value.steps.map((text, i) => ({
             '@type': 'HowToStep',
             position: i + 1,
+            name: `Step ${i + 1}`,
             text,
+            url: `${runtimeConfig.public.appUrl}${route.path.replace(/\/$/, '')}#step-${i + 1}`,
+            image: recipe.value?.image ?? runtimeConfig.public.appImage,
           }))
         : undefined,
       nutrition: recipe.value?.nutrition
