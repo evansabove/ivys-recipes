@@ -5,8 +5,19 @@
         <span class="hero-title-accent">Ivy's</span> Recipes
       </h1>
       <p class="hero-subtitle">
-        Simple, delicious recipes for every occasion — from weeknight dinners to weekend feasts to yummy puddings....
+        Simple, delicious recipes for every occasion - from warming dinners to yummy puddings.
       </p>
+      <p class="hero-manifesto">We're sick of cookie banners. We're sick of ads interrupting recipes. Ivy's Recipes will remain <strong>ad-free forever</strong>.</p>
+      <div class="hero-badges" aria-label="Site features">
+        <span class="hero-badge">
+          <Icon name="fa6-solid:ban" class="hero-badge-icon" />
+          Ad-free
+        </span>
+        <span class="hero-badge">
+          <Icon name="fa6-solid:cookie-bite" class="hero-badge-icon" />
+          Cookie-free
+        </span>
+      </div>
       <NuxtLink to="/recipes" class="hero-cta">
         Browse Recipes
         <Icon name="fa6-solid:arrow-right" class="hero-cta-icon" />
@@ -75,6 +86,45 @@
 
 .hero-cta-icon {
   @apply text-sm;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+}
+
+.hero-badge-icon {
+  font-size: 0.7rem;
+  opacity: 0.85;
+}
+
+.hero-manifesto {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  margin: 0;
+}
+
+.hero-manifesto strong {
+  color: #86efac;
+  font-style: normal;
+  font-weight: 600;
 }
 
 .hero-decoration {

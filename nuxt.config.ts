@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     public: {
       appName: appName,
       appUrl: 'https://ivys-recipes.net',
-      appDescription: "Ivy's Recipes — simple, delicious recipes for every occasion.",
+      appDescription: "Ivy's Recipes — simple, delicious recipes for every occasion. 100% ad-free and cookie-free.",
       appImage: 'https://ivys-recipes.net/og-image.png',
     }
   },
