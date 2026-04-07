@@ -42,7 +42,6 @@ useHead({
 <template>
   <AppTemplate>
     <HomeHero />
-    <AdUnit slot="4820106706" format="horizontal" />
     <RecipeList
       :recipes="recentRecipes ?? []"
       heading="Recent Recipes"

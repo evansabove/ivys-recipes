@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const appName = "Ivy's Recipes"
-const adsensePublisherId = '6658400101081479'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
@@ -13,8 +12,6 @@ export default defineNuxtConfig({
       appUrl: 'https://ivys-recipes.net',
       appDescription: "Ivy's Recipes — simple, delicious recipes for every occasion.",
       appImage: 'https://ivys-recipes.net/og-image.png',
-      adsensePublisherId: adsensePublisherId,
-      adsEnabled: false, // ← flip to true once approved by AdSense
     }
   },
   ssr: true,
@@ -37,9 +34,7 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon.png' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon.png' },
       ],
-      // AdSense loader — only injected when adsEnabled is true.
       script: [],
-      // To re-enable ads: set adsEnabled to true in runtimeConfig above.
       htmlAttrs: {
         lang: 'en'
       }
