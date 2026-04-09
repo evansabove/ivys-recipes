@@ -31,7 +31,7 @@ useSeoMeta({
   ogImage: computed(() => recipe.value?.image ?? runtimeConfig.public.appImage),
   ogType: 'article',
   ogLocale: 'en_GB',
-  ogUrl: computed(() => `${runtimeConfig.public.appUrl}${route.path.replace(/\/$/, '')}`),
+  ogUrl: computed(() => `${runtimeConfig.public.appUrl}${route.path.replace(/\/?$/, '/')}`),
   twitterCard: 'summary_large_image',
   twitterTitle: computed(() => `${recipe.value?.title} | Ivy's Recipes`),
   twitterDescription: computed(() => recipe.value?.description ?? runtimeConfig.public.appDescription),
@@ -76,7 +76,7 @@ useHead({
         ? recipe.value.steps.map((text, i) => ({
             '@type': 'HowToStep',
             text,
-            url: `${runtimeConfig.public.appUrl}${route.path.replace(/\/$/, '')}#step-${i + 1}`,
+            url: `${runtimeConfig.public.appUrl}${route.path.replace(/\/?$/, '/')}#step-${i + 1}`,
           }))
         : undefined,
       nutrition: recipe.value?.nutrition
