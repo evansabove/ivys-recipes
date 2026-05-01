@@ -3,8 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "validate": "node scripts/validate-recipes.mjs",
+    "prebuild": "npm run validate",
     "build": "nuxt build",
     "dev": "nuxt dev --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
+    "pregenerate": "npm run validate",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"

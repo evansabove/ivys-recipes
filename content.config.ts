@@ -17,7 +17,7 @@ export default defineContentConfig({
         servings: z.number().optional(),
         image: z.string().optional(),
         imageAlt: z.string().optional(),
-        intro: z.string().optional(),
+        intro: z.string().min(80, 'Intro must be at least 80 characters for SEO'),
         steps: z.array(z.string()).optional(),
         serve: z.string().optional(),
         tips: z.array(z.string()).optional(),
