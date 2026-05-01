@@ -24,9 +24,15 @@ useHead({
   titleTemplate: (t) => t ? `${t} | Ivy's Recipes` : "Ivy's Recipes",
 })
 
+const fullDescription = computed(() => {
+  const desc = recipe.value?.description ?? runtimeConfig.public.appDescription
+  const intro = recipe.value?.intro
+  return intro ? `${desc} ${intro}` : desc
+})
+
 useSeoMeta({
   ogTitle: computed(() => `${recipe.value?.title} | Ivy's Recipes`),
-  description: computed(() => recipe.value?.description ?? runtimeConfig.public.appDescription),
+  description: fullDescription,
   ogDescription: computed(() => recipe.value?.description ?? runtimeConfig.public.appDescription),
   ogImage: computed(() => recipe.value?.image ?? runtimeConfig.public.appImage),
   ogType: 'article',
