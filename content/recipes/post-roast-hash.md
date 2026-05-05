@@ -1,6 +1,6 @@
 ---
 title: "Post-Roast Hash"
-description: "Just done a roast? In the unlikely even you have any leftover roast potatoes, consider this delicious way of using up all those spuds, and perhaps pack some extra veggies in there as well. This is a highly customisable recipe, feel free to mix and match - see my tips below for great additions."
+description: "A crispy, golden hash made from leftover roast potatoes and whatever veg you have to hand, topped with a fried egg. The ultimate day-after-roast breakfast."
 date: 2026-04-14
 category: Breakfast
 prepTime: "10 mins"

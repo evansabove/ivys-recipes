@@ -81,6 +81,7 @@ useHead({
       recipeInstructions: recipe.value?.steps?.length
         ? recipe.value.steps.map((text, i) => ({
             '@type': 'HowToStep',
+            position: i + 1,
             name: `Step ${i + 1}`,
             text,
             image: recipe.value?.image,

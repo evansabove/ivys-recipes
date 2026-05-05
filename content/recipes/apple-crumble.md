@@ -1,6 +1,6 @@
 ---
 title: "Apple Crumble"
-description: "A family classic - I used some frozen berries in this version - use your imagination to make this even more excellent!"
+description: "A warm, golden apple crumble with a buttery, crispy topping and a fruity twist — mixed berries stirred through tender Bramley apples. A proper family favourite."
 date: 2026-03-30
 category: Pudding
 prepTime: "15 mins"
