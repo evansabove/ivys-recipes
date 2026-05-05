@@ -10,6 +10,7 @@ tags: ["Leftovers", "Comfort", "Eggs", "Potatoes"]
 recipeCuisine: "British"
 keywords: ["post roast hash", "leftover roast", "breakfast hash", "fried egg", "leftover potatoes", "vegetable hash"]
 image: /images/recipes/post-roast-hash/post-roast-hash.jpeg
+intro: "The day-after-the-roast breakfast that honestly might be better than the roast itself. Crispy potatoes, a pile of veg and a runny fried egg on top — it's the ultimate way to use up leftovers. Chuck in whatever you've got; this recipe is more of a vibe than a strict set of rules."
 ingredients:
   - group: "For the hash"
     items:

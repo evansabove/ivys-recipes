@@ -10,6 +10,7 @@ tags: ["Chicken", "Comfort", "Creamy"]
 recipeCuisine: "Russian"
 keywords: ["chicken stroganoff", "mushroom stroganoff", "comfort food", "easy dinner", "creamy chicken"]
 image: /images/recipes/stroganoff/stroganoff.jpeg
+intro: "This is a proper weeknight winner — it's on the table in about 35 minutes and tastes like it's been slow-cooking all afternoon. The secret is getting a really good sear on the chicken and veg before the stock goes in. Don't rush that bit!"
 ingredients:
   - group: "For the stroganoff"
     items:
