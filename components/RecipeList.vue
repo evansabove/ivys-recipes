@@ -12,7 +12,6 @@ defineProps<{
     tags?: string[]
     image?: string
     imageAlt?: string
-    thumbnail?: string
   }>
   heading?: string
 }>()

@@ -11,7 +11,6 @@ recipeCuisine: "Mexican"
 keywords: ["chilli con carne", "chili", "mince", "beef chilli", "batch cooking", "comfort food", "one pot"]
 image: /images/recipes/chilli-con-carne/chilli.jpeg
 imageAlt: "A bowl of rich chilli con carne served over rice"
-thumbnail: /images/recipes/chilli-con-carne/chilli-thumb.jpeg
 intro: "One of those meals that just makes everything better. A bowl of this after a long day and you're sorted. It's barely any effort — brown the mince, throw in the spices, let it bubble away — and it tastes like you've been slaving over it for hours. Scales up easily too, so make extra and stick some in the freezer. Future you will be grateful. I've used a little carrot in mine - I had some to use up. Feel free to get creative with the ingredients!"
 ingredients:
   - group: "For the chilli"

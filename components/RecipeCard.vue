@@ -12,7 +12,6 @@ defineProps<{
     tags?: string[]
     image?: string
     imageAlt?: string
-    thumbnail?: string
   }
 }>()
 </script>
@@ -21,8 +20,8 @@ defineProps<{
   <NuxtLink :to="recipe.path" class="recipe-card">
     <div class="recipe-card-image-wrap">
       <img
-        v-if="recipe.thumbnail || recipe.image"
-        :src="recipe.thumbnail ?? recipe.image"
+        v-if="recipe.image"
+        :src="recipe.image"
         :alt="recipe.imageAlt ?? recipe.title"
         class="recipe-card-image"
       />
