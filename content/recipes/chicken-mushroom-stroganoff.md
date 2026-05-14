@@ -29,7 +29,7 @@ ingredients:
       - "Brown rice, white rice or pasta"
       - "Flat-leaf parsley"
 steps:
-  - "Get a frying pan nice and hot, then sear the **6 chicken thighs** in **1 tbsp olive oil**. There's no need to cook them all the way through at this stage. Remove and set aside."
+  - "Get a frying pan nice and hot, then sear the **6 chicken thighs** in **1 tbsp olive oil**. If using a stainless steel pan, leave skin side down until it easily lifts off the pan - then it will be beautifull seared. There's no need to cook them all the way through at this stage. Remove and set aside."
   - "While that's frying, finely chop the **1 large onion**, **1 medium carrot** and **1 stick of celery**. Keeping the pan on a high heat, add them to the pan and cook for 5–8 minutes until softened and starting to brown. Season now with a pinch of sea salt and black pepper."
   - "Add the **mushrooms** and cook for 5–8 minutes until they release their liquid and start to brown at the edges."
   - "Finely chop the **2 cloves of garlic** and the parsley stalks. Add them to the pan and cook for a minute until fragrant."
