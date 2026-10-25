@@ -9,6 +9,8 @@ export default defineContentConfig({
         title: z.string(),
         description: z.string(),
         date: z.string(),
+        // Set when a recipe is meaningfully revised; used for dateModified in structured data
+        updated: z.string().optional(),
         tags: z.array(z.string()).optional(),
         category: z.enum(['Breakfast', 'Lunch', 'Dinner', 'Pudding']).optional(),
         draft: z.boolean().optional().default(false),
