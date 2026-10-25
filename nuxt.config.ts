@@ -40,16 +40,23 @@ export default defineNuxtConfig({
       ],
       script: [],
       htmlAttrs: {
-        lang: 'en'
+        lang: 'en-GB'
       }
     }
   },
   site: {
     url: 'https://ivys-recipes.net',
     name: appName,
+    defaultLocale: 'en-GB',
     trailingSlash: true
   },
   experimental: {
-    payloadExtraction: false
+    payloadExtraction: false,
+    // Match the trailing-slash canonical URLs so internal links don't point at duplicates
+    defaults: {
+      nuxtLink: {
+        trailingSlash: 'append'
+      }
+    }
   }
 })

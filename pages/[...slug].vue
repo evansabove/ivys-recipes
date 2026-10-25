@@ -24,14 +24,11 @@ useHead({
   titleTemplate: (t) => t ? `${t} | Ivy's Recipes` : "Ivy's Recipes",
 })
 
-const fullDescription = computed(() => {
-  const desc = recipe.value?.description ?? runtimeConfig.public.appDescription
-  const intro = recipe.value?.intro
-  return intro ? `${desc} ${intro}` : desc
-})
+const description = computed(() => recipe.value?.description ?? runtimeConfig.public.appDescription)
 
 // Structured data and social tags need absolute URLs
 const absoluteUrl = (path: string) => new URL(path, runtimeConfig.public.appUrl).href
+const pageUrl = computed(() => absoluteUrl(route.path.replace(/\/?$/, '/')))
 
 const shareImage = computed(() =>
   recipe.value?.image ? absoluteUrl(recipe.value.image) : runtimeConfig.public.appImage
@@ -43,17 +40,17 @@ const shareImageType = computed(() =>
 
 useSeoMeta({
   ogTitle: computed(() => `${recipe.value?.title} | Ivy's Recipes`),
-  description: fullDescription,
-  ogDescription: computed(() => recipe.value?.description ?? runtimeConfig.public.appDescription),
+  description,
+  ogDescription: description,
   ogImage: shareImage,
   ogImageAlt: shareImageAlt,
   ogImageType: shareImageType,
   ogType: 'article',
   ogLocale: 'en_GB',
-  ogUrl: computed(() => `${runtimeConfig.public.appUrl}${route.path.replace(/\/?$/, '/')}`),
+  ogUrl: pageUrl,
   twitterCard: 'summary_large_image',
   twitterTitle: computed(() => `${recipe.value?.title} | Ivy's Recipes`),
-  twitterDescription: computed(() => recipe.value?.description ?? runtimeConfig.public.appDescription),
+  twitterDescription: description,
   twitterImage: shareImage,
   twitterImageAlt: shareImageAlt,
 })
@@ -84,20 +81,39 @@ const allIngredients = computed(() =>
   recipe.value?.ingredients?.flatMap(g => g.items) ?? []
 )
 
-// Convert human-readable durations like "15 mins", "1 hr 30 mins" to ISO 8601
-function toISO8601Duration(value: string | undefined): string | undefined {
-  if (!value) return undefined
+// Parse human-readable durations like "15 mins", "1 hr 30 mins" into minutes
+function toMinutes(value: string | undefined): number {
+  if (!value) return 0
   const clean = value.toLowerCase().trim()
   const hours = clean.match(/(\d+)\s*h(?:r|our)?s?/)
   const mins = clean.match(/(\d+)\s*m(?:in)?s?/)
-  const h = hours ? parseInt(hours[1]) : 0
-  const m = mins ? parseInt(mins[1]) : 0
-  if (!h && !m) return undefined
+  return (hours ? parseInt(hours[1]) * 60 : 0) + (mins ? parseInt(mins[1]) : 0)
+}
+
+// Format minutes as an ISO 8601 duration, e.g. 90 → "PT1H30M"
+function toISO8601Duration(minutes: number): string | undefined {
+  if (!minutes) return undefined
+  const h = Math.floor(minutes / 60)
+  const m = minutes % 60
   return `PT${h ? `${h}H` : ''}${m ? `${m}M` : ''}`
 }
 
+const prepMinutes = computed(() => toMinutes(recipe.value?.prepTime))
+const cookMinutes = computed(() => toMinutes(recipe.value?.cookTime))
+
 useHead({
   script: [{
+    type: 'application/ld+json',
+    innerHTML: computed(() => JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: absoluteUrl('/') },
+        { '@type': 'ListItem', position: 2, name: 'Recipes', item: absoluteUrl('/recipes/') },
+        { '@type': 'ListItem', position: 3, name: recipe.value?.title, item: pageUrl.value },
+      ],
+    }))
+  }, {
     type: 'application/ld+json',
     innerHTML: computed(() => JSON.stringify({
       '@context': 'https://schema.org',
@@ -106,12 +122,14 @@ useHead({
       description: recipe.value?.description,
       image: recipe.value?.image ? [absoluteUrl(recipe.value.image)] : undefined,
       datePublished: recipe.value?.date,
+      dateModified: recipe.value?.updated ?? recipe.value?.date,
       author: [{ '@type': 'Person', name: 'Andy Evans', url: runtimeConfig.public.appUrl }],
       recipeCategory: recipe.value?.category,
       recipeCuisine: recipe.value?.recipeCuisine,
       keywords: recipe.value?.keywords?.join(', '),
-      prepTime: toISO8601Duration(recipe.value?.prepTime),
-      cookTime: toISO8601Duration(recipe.value?.cookTime),
+      prepTime: toISO8601Duration(prepMinutes.value),
+      cookTime: toISO8601Duration(cookMinutes.value),
+      totalTime: toISO8601Duration(prepMinutes.value + cookMinutes.value),
       recipeYield: recipe.value?.servings ? `${recipe.value.servings} servings` : undefined,
       recipeIngredient: allIngredients.value.length ? allIngredients.value : undefined,
       recipeInstructions: recipe.value?.steps?.length
@@ -121,7 +139,7 @@ useHead({
             name: `Step ${i + 1}`,
             // Strip the **quantity** highlight markers used on the page
             text: text.replace(/\*\*(.+?)\*\*/g, '$1'),
-            url: `${runtimeConfig.public.appUrl}${route.path.replace(/\/?$/, '/')}#step-${i + 1}`,
+            url: `${pageUrl.value}#step-${i + 1}`,
           }))
         : undefined,
       nutrition: recipe.value?.nutrition

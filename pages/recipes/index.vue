@@ -45,14 +45,18 @@ useHead({
   titleTemplate: (t) => t ? `${t} | Ivy's Recipes` : "Ivy's Recipes",
 })
 
+const description = "Browse every recipe on Ivy's Recipes — simple, family-friendly dinners, lunches and puddings with clear steps. No ads, no cookie banners."
+
 useSeoMeta({
   ogTitle: "Recipes | Ivy's Recipes",
-  description: runtimeConfig.public.appDescription,
-  ogDescription: runtimeConfig.public.appDescription,
+  description,
+  ogDescription: description,
   ogLocale: 'en_GB',
   ogImage: runtimeConfig.public.appImage,
-  ogUrl: computed(() => `${runtimeConfig.public.appUrl}${route.path.replace(/\/$/, '')}`),
+  ogUrl: computed(() => `${runtimeConfig.public.appUrl}${route.path.replace(/\/?$/, '/')}`),
   twitterCard: 'summary_large_image',
+  twitterTitle: "Recipes | Ivy's Recipes",
+  twitterDescription: description,
 })
 </script>
 

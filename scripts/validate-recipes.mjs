@@ -7,8 +7,10 @@ import { join } from 'path'
 
 const RECIPES_DIR = join(import.meta.dirname, '..', 'content', 'recipes')
 const MIN_INTRO_LENGTH = 80
+const MAX_DESCRIPTION_LENGTH = 160
 
 const errors = []
+const warnings = []
 
 for (const file of readdirSync(RECIPES_DIR).filter(f => f.endsWith('.md'))) {
   const content = readFileSync(join(RECIPES_DIR, file), 'utf-8')
@@ -33,6 +35,19 @@ for (const file of readdirSync(RECIPES_DIR).filter(f => f.endsWith('.md'))) {
   if (introLength < MIN_INTRO_LENGTH) {
     errors.push(`${file}: 'intro' is ${introLength} chars, needs at least ${MIN_INTRO_LENGTH} for SEO`)
   }
+
+  // Description is used as the meta description — search results truncate long ones
+  const descriptionMatch = frontmatter.match(/^description:\s*["']?(.*?)["']?\s*$/m)
+  const descriptionLength = descriptionMatch?.[1].length ?? 0
+  if (descriptionLength > MAX_DESCRIPTION_LENGTH) {
+    warnings.push(`${file}: 'description' is ${descriptionLength} chars, search results may truncate it after ~${MAX_DESCRIPTION_LENGTH}`)
+  }
+}
+
+if (warnings.length) {
+  console.warn('\n⚠️  Recipe warnings:\n')
+  warnings.forEach(w => console.warn(`  • ${w}`))
+  console.warn()
 }
 
 if (errors.length) {

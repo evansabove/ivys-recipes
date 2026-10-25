@@ -17,7 +17,7 @@ useSeoMeta({
   ogDescription: runtimeConfig.public.appDescription,
   ogLocale: 'en_GB',
   ogImage: runtimeConfig.public.appImage,
-  ogUrl: runtimeConfig.public.appUrl,
+  ogUrl: `${runtimeConfig.public.appUrl}/`,
   twitterCard: 'summary_large_image',
   twitterTitle: "Ivy's Recipes",
   twitterDescription: runtimeConfig.public.appDescription,
