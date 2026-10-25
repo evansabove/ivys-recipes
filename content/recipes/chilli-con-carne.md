@@ -6,6 +6,7 @@ category: Dinner
 prepTime: "15 mins"
 cookTime: "1 hr"
 servings: 4
+scaleOptions: ["1/2", 1, 2, 3]
 tags: ["Dinner", "Comfort", "Spicy", "Batch Cook"]
 recipeCuisine: "Mexican"
 keywords: ["chilli con carne", "chili", "mince", "beef chilli", "batch cooking", "comfort food", "one pot"]

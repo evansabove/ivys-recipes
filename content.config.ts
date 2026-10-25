@@ -15,6 +15,10 @@ export default defineContentConfig({
         prepTime: z.string().optional(),
         cookTime: z.string().optional(),
         servings: z.number().optional(),
+        // Preset multipliers offered in the "Scale" dropdown, e.g. ["1/4", "1/2", 1, 2]
+        scaleOptions: z.array(
+          z.union([z.number().positive(), z.string().regex(/^\d+\/\d+$/, 'Use a fraction like "1/4"')])
+        ).optional(),
         image: z.string().optional(),
         imageAlt: z.string().optional(),
         intro: z.string().min(80, 'Intro must be at least 80 characters for SEO'),
