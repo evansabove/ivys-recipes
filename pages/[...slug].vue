@@ -44,6 +44,28 @@ useSeoMeta({
   twitterImage: computed(() => recipe.value?.image ?? runtimeConfig.public.appImage),
 })
 
+// Recipe scaling — only offered when the recipe lists scaleOptions in its frontmatter.
+// Structured data (JSON-LD below) always uses the original quantities.
+const scaleOptions = computed(() => {
+  const options = recipe.value?.scaleOptions?.map(parseScale) ?? []
+  if (options.length && !options.includes(1)) options.push(1)
+  return [...new Set(options)].sort((a, b) => a - b)
+})
+const scale = ref(1)
+
+const scaledIngredients = computed(() =>
+  recipe.value?.ingredients?.map(g => ({
+    ...g,
+    items: g.items.map(item => scaleIngredient(item, scale.value)),
+  })) ?? []
+)
+const scaledSteps = computed(() =>
+  recipe.value?.steps?.map(step => scaleStep(step, scale.value)) ?? []
+)
+const scaledServings = computed(() =>
+  recipe.value?.servings ? formatQuantity(recipe.value.servings * scale.value) : undefined
+)
+
 const allIngredients = computed(() =>
   recipe.value?.ingredients?.flatMap(g => g.items) ?? []
 )
@@ -129,7 +151,7 @@ useHead({
         :category="recipe.category"
         :prepTime="recipe.prepTime"
         :cookTime="recipe.cookTime"
-        :servings="recipe.servings"
+        :servings="scaledServings"
       />
 
       <!-- Intro paragraph -->
@@ -137,9 +159,23 @@ useHead({
 
       <!-- Ingredients -->
       <section v-if="recipe.ingredients?.length" class="recipe-ingredients">
-        <h2 class="recipe-section-heading">Ingredients</h2>
+        <div class="recipe-ingredients-header">
+          <h2 class="recipe-section-heading">Ingredients</h2>
+          <label v-if="scaleOptions.length > 1" class="recipe-scale">
+            <Icon name="fa6-solid:up-right-and-down-left-from-center" class="recipe-scale-icon" />
+            <span class="recipe-scale-label">Scale</span>
+            <select v-model.number="scale" class="recipe-scale-select">
+              <option v-for="option in scaleOptions" :key="option" :value="option">
+                {{ formatScale(option) }}
+              </option>
+            </select>
+          </label>
+        </div>
+        <p v-if="scale !== 1" class="recipe-scale-note">
+          Quantities scaled to {{ formatScale(scale) }}. Cooking times and dish size may need adjusting.
+        </p>
         <div
-          v-for="group in recipe.ingredients"
+          v-for="group in scaledIngredients"
           :key="group.group ?? 'default'"
           class="recipe-ingredients-group"
         >
@@ -153,7 +189,7 @@ useHead({
       </section>
 
       <!-- Method steps with quantity highlighting -->
-      <RecipeMethod v-if="recipe.steps?.length" :steps="recipe.steps" />
+      <RecipeMethod v-if="scaledSteps.length" :steps="scaledSteps" />
 
       <!-- Serve -->
       <section v-if="recipe.serve" class="recipe-serve">
@@ -230,6 +266,36 @@ useHead({
 
 .recipe-ingredients {
   @apply mb-6;
+}
+
+.recipe-ingredients-header {
+  @apply flex flex-wrap items-center justify-between gap-3 mb-4;
+
+  & .recipe-section-heading {
+    @apply mb-0;
+  }
+}
+
+.recipe-scale {
+  @apply flex items-center gap-2 text-sm;
+}
+
+.recipe-scale-icon {
+  @apply text-emerald-700 text-base;
+}
+
+.recipe-scale-label {
+  @apply font-semibold text-stone-600;
+}
+
+.recipe-scale-select {
+  @apply bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-1.5;
+  @apply text-stone-800 font-semibold cursor-pointer;
+  @apply focus:outline-none focus:ring-2 focus:ring-emerald-400;
+}
+
+.recipe-scale-note {
+  @apply text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-4 mt-0;
 }
 
 .recipe-ingredients-group {

@@ -6,6 +6,7 @@ category: Dinner
 prepTime: "10 mins"
 cookTime: "25 mins"
 servings: 4
+scaleOptions: ["1/2", 1, 1.5, 2]
 tags: ["Chicken", "Comfort", "Creamy"]
 recipeCuisine: "Russian"
 keywords: ["chicken stroganoff", "mushroom stroganoff", "comfort food", "easy dinner", "creamy chicken"]

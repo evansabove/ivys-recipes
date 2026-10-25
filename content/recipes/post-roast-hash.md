@@ -6,6 +6,7 @@ category: Breakfast
 prepTime: "10 mins"
 cookTime: "20 mins"
 servings: 2
+scaleOptions: ["1/2", 1, 2]
 tags: ["Leftovers", "Comfort", "Eggs", "Potatoes"]
 recipeCuisine: "British"
 keywords: ["post roast hash", "leftover roast", "breakfast hash", "fried egg", "leftover potatoes", "vegetable hash"]

@@ -3,7 +3,7 @@ defineProps<{
   category?: string
   prepTime?: string
   cookTime?: string
-  servings?: number
+  servings?: number | string
   tags?: string[]
 }>()
 </script>
