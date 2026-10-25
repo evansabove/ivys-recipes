@@ -30,18 +30,32 @@ const fullDescription = computed(() => {
   return intro ? `${desc} ${intro}` : desc
 })
 
+// Structured data and social tags need absolute URLs
+const absoluteUrl = (path: string) => new URL(path, runtimeConfig.public.appUrl).href
+
+const shareImage = computed(() =>
+  recipe.value?.image ? absoluteUrl(recipe.value.image) : runtimeConfig.public.appImage
+)
+const shareImageAlt = computed(() => recipe.value?.imageAlt ?? recipe.value?.title)
+const shareImageType = computed(() =>
+  /\.png$/i.test(shareImage.value) ? 'image/png' as const : 'image/jpeg' as const
+)
+
 useSeoMeta({
   ogTitle: computed(() => `${recipe.value?.title} | Ivy's Recipes`),
   description: fullDescription,
   ogDescription: computed(() => recipe.value?.description ?? runtimeConfig.public.appDescription),
-  ogImage: computed(() => recipe.value?.image ?? runtimeConfig.public.appImage),
+  ogImage: shareImage,
+  ogImageAlt: shareImageAlt,
+  ogImageType: shareImageType,
   ogType: 'article',
   ogLocale: 'en_GB',
   ogUrl: computed(() => `${runtimeConfig.public.appUrl}${route.path.replace(/\/?$/, '/')}`),
   twitterCard: 'summary_large_image',
   twitterTitle: computed(() => `${recipe.value?.title} | Ivy's Recipes`),
   twitterDescription: computed(() => recipe.value?.description ?? runtimeConfig.public.appDescription),
-  twitterImage: computed(() => recipe.value?.image ?? runtimeConfig.public.appImage),
+  twitterImage: shareImage,
+  twitterImageAlt: shareImageAlt,
 })
 
 // Recipe scaling — only offered when the recipe lists scaleOptions in its frontmatter.
@@ -90,7 +104,7 @@ useHead({
       '@type': 'Recipe',
       name: recipe.value?.title,
       description: recipe.value?.description,
-      image: recipe.value?.image,
+      image: recipe.value?.image ? [absoluteUrl(recipe.value.image)] : undefined,
       datePublished: recipe.value?.date,
       author: [{ '@type': 'Person', name: 'Andy Evans', url: runtimeConfig.public.appUrl }],
       recipeCategory: recipe.value?.category,
@@ -105,8 +119,8 @@ useHead({
             '@type': 'HowToStep',
             position: i + 1,
             name: `Step ${i + 1}`,
-            text,
-            image: recipe.value?.image,
+            // Strip the **quantity** highlight markers used on the page
+            text: text.replace(/\*\*(.+?)\*\*/g, '$1'),
             url: `${runtimeConfig.public.appUrl}${route.path.replace(/\/?$/, '/')}#step-${i + 1}`,
           }))
         : undefined,

@@ -28,6 +28,10 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        // Declared here so nuxt-seo-utils doesn't auto-inject og-image.png's
+        // width/height/type, which would leak onto pages with their own image
+        { property: 'og:image', content: 'https://ivys-recipes.net/og-image.png' },
+        { name: 'twitter:image', content: 'https://ivys-recipes.net/og-image.png' },
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
