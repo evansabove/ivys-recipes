@@ -19,10 +19,12 @@ defineProps<{
 <template>
   <NuxtLink :to="recipe.path" class="recipe-card">
     <div class="recipe-card-image-wrap">
-      <img
+      <!-- sizes mirrors the 1/2/3-column grid inside the 1200px, 2rem-padded container -->
+      <RecipeImage
         v-if="recipe.image"
         :src="recipe.image"
         :alt="recipe.imageAlt ?? recipe.title"
+        sizes="(min-width: 1200px) 363px, (min-width: 1024px) calc((100vw - 7rem) / 3), (min-width: 640px) calc((100vw - 5.5rem) / 2), calc(100vw - 4rem)"
         class="recipe-card-image"
       />
       <div v-else class="recipe-card-image-placeholder">
@@ -77,14 +79,15 @@ defineProps<{
   height: 200px;
 }
 
-.recipe-card-image {
+/* :deep — the <img> lives inside RecipeImage's <picture> */
+.recipe-card-image-wrap :deep(.recipe-card-image) {
   @apply w-full h-full object-cover;
   @apply my-0 rounded-none shadow-none;
   max-height: unset;
   transition: transform 0.3s ease;
 }
 
-.recipe-card:hover .recipe-card-image {
+.recipe-card:hover :deep(.recipe-card-image) {
   transform: scale(1.03);
 }
 

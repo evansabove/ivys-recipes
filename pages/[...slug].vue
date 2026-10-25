@@ -172,10 +172,13 @@ useHead({
         </div>
       </header>
 
-      <img
+      <!-- Hero sits in the 768px article column -->
+      <RecipeImage
         v-if="recipe.image"
         :src="recipe.image"
         :alt="recipe.imageAlt ?? recipe.title"
+        sizes="(min-width: 832px) 768px, calc(100vw - 4rem)"
+        priority
         class="recipe-hero-image"
       />
 
@@ -285,7 +288,8 @@ useHead({
   @apply rounded-full px-3 py-1;
 }
 
-.recipe-hero-image {
+/* :deep — the <img> lives inside RecipeImage's <picture> */
+.recipe-detail :deep(.recipe-hero-image) {
   @apply w-full rounded-2xl shadow-md mb-8;
   @apply mt-0;
   max-height: 400px;

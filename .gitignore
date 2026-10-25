@@ -17,3 +17,7 @@ dist/
 # Editor
 .vscode/
 .idea/
+
+# Generated images
+public/images/_generated/
+assets/image-manifest.json
